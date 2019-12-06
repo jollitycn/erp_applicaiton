@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+          http://www.springframework.org/schema/beans/spring-beans.xsd ">
+
+    <!-- Beans -->
+   <bean id="userIO" class="com.sg.flooringmastery.ui.UserIOConsoleImpl"/>
+   
+   <bean id="view" class="com.sg.flooringmastery.ui.FlooringMasteryView">
+       <constructor-arg ref="userIO"/>
+   </bean>
+   
+   <bean id="prodDao" class="com.sg.flooringmastery.dao.FlooringMasteryProdDaoFileImpl"/>
+   
+   <bean id="trainingDao" class="com.sg.flooringmastery.dao.FlooringMasteryTrainingDaoFileImpl"/>
+   
+   <bean id="auditDao" class="com.sg.flooringmastery.dao.FlooringMasteryAuditDaoFileImpl"/>
+   
+   <bean id="prodServiceLayer" class="com.sg.flooringmastery.service.FlooringMasteryServiceLayerImpl">
+       <constructor-arg ref="prodDao"/>
+       <constructor-arg ref="auditDao"/>
+   </bean>
+   
+   <bean id="trainingServiceLayer" class="com.sg.flooringmastery.service.FlooringMasteryServiceLayerImpl">
+       <constructor-arg ref="trainingDao"/>
+       <constructor-arg ref="auditDao"/>
+   </bean>
+   
+   <bean id="production" class="com.sg.flooringmastery.controller.FlooringMasteryController">
+       <constructor-arg ref="view"/>
+       <constructor-arg ref="prodServiceLayer"/>
+   </bean>
+   
+   <bean id="training" class="com.sg.flooringmastery.controller.FlooringMasteryController">
+       <constructor-arg ref="view"/>
+       <constructor-arg ref="trainingServiceLayer"/>
+   </bean>
+   
+</beans>

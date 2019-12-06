@@ -1,0 +1,4 @@
+OH::ohio::6.25
+PA::pennsylvania::6.75
+MI::michigan::5.75
+IN::indiana::6.00
